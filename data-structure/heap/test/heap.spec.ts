@@ -1,21 +1,20 @@
-import { MaxHeap } from "../maxHeap";
-import { MinHeap } from "../minHeap";
+import { Heap } from "../heap";
 
 describe("heap", () => {
   describe("minHeap", () => {
     it("heapify up when inserting a value", () => {
       const input = [10, 5, 20, 15, 8, 3, 12, 7, 1, 4];
 
-      const minHeap = new MinHeap();
-      input.forEach((v) => minHeap.insert({ value: v }));
+      const minHeap = new Heap<number>((a, b) => a - b);
+      input.forEach((v) => minHeap.insert(v));
 
       const expected = [...input].sort((a, b) => a - b);
 
-      expect(minHeap.peek()?.value).toBe(Math.min(...input));
+      expect(minHeap.peek()).toBe(Math.min(...input));
 
       const result: number[] = [];
       while (!minHeap.isEmpty()) {
-        result.push(minHeap.remove()!.value);
+        result.push(minHeap.remove()!);
       }
 
       expect(result).toEqual(expected);
@@ -23,8 +22,8 @@ describe("heap", () => {
     it("heapify down when removing a value", () => {
       const input = [10, 5, 20, 15, 8, 3, 12, 7, 1, 4];
 
-      const minHeap = new MinHeap();
-      input.forEach((v) => minHeap.insert({ value: v }));
+      const minHeap = new Heap<number>((a, b) => a - b);
+      input.forEach((v) => minHeap.insert(v));
 
       const removeLength = input.length / 2;
       for (let i = 0; i < removeLength; i++) {
@@ -37,7 +36,7 @@ describe("heap", () => {
 
       const result: number[] = [];
       while (!minHeap.isEmpty()) {
-        result.push(minHeap.remove()!.value);
+        result.push(minHeap.remove()!);
       }
       expect(result).toEqual(expected);
     });
@@ -47,16 +46,16 @@ describe("heap", () => {
     it("heapify up when inserting a value", () => {
       const input = [10, 5, 20, 15, 8, 3, 12, 7, 1, 4];
 
-      const maxHeap = new MaxHeap();
-      input.forEach((v) => maxHeap.insert({ value: v }));
+      const maxHeap = new Heap<number>((a, b) => b - a);
+      input.forEach((v) => maxHeap.insert(v));
 
       const expected = [...input].sort((a, b) => b - a);
 
-      expect(maxHeap.peek()?.value).toBe(Math.max(...input));
+      expect(maxHeap.peek()).toBe(Math.max(...input));
 
       const result: number[] = [];
       while (!maxHeap.isEmpty()) {
-        result.push(maxHeap.remove()!.value);
+        result.push(maxHeap.remove()!);
       }
 
       expect(result).toEqual(expected);
@@ -64,8 +63,8 @@ describe("heap", () => {
     it("heapify down when removing a value", () => {
       const input = [10, 5, 20, 15, 8, 3, 12, 7, 1, 4];
 
-      const maxHeap = new MaxHeap();
-      input.forEach((v) => maxHeap.insert({ value: v }));
+      const maxHeap = new Heap<number>((a, b) => b - a);
+      input.forEach((v) => maxHeap.insert(v));
 
       const removeLength = input.length / 2;
       for (let i = 0; i < removeLength; i++) {
@@ -78,7 +77,7 @@ describe("heap", () => {
 
       const result: number[] = [];
       while (!maxHeap.isEmpty()) {
-        result.push(maxHeap.remove()!.value);
+        result.push(maxHeap.remove()!);
       }
       expect(result).toEqual(expected);
     });
