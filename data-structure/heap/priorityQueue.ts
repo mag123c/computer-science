@@ -1,4 +1,4 @@
-import { Heap } from "../heap";
+import { Heap } from "./heap";
 
 export class PriorityQueue<T> extends Heap<T> {
   constructor(comparator: (a: T, b: T) => number) {
